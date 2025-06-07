@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLOODLINE ~X University</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white font-sans tracking-wide">
+
+  <!-- HEADER -->
+  <header class="bg-black py-8 shadow-md">
+    <h1 class="text-center text-5xl font-extrabold text-red-600">BLOODLINE ~X UNIVERSITY</h1>
+    <p class="text-center text-gray-400 text-xl mt-2">Unlocking Your Power Through Knowledge</p>
+  </header>
+
+  <!-- ADMISSION FORM SECTION -->
+  <section class="px-4 py-16 bg-gray-900 min-h-screen flex flex-col justify-center items-center">
+    <div class="max-w-xl w-full bg-gray-800 p-8 rounded-2xl shadow-2xl border border-gray-700">
+      <h2 class="text-3xl font-bold text-center mb-8 text-white">Admission Form 2025</h2>
+      <form id="admission-form" action="YOUR_WEB_APP_URL_HERE" method="POST" class="space-y-6">
+        <div>
+          <label for="name" class="block text-lg font-semibold mb-2">Full Name</label>
+          <input type="text" id="name" name="name" required
+            class="w-full px-4 py-3 bg-gray-900 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500" />
+        </div>
+
+        <div>
+          <label for="email" class="block text-lg font-semibold mb-2">Email Address</label>
+          <input type="email" id="email" name="email" required
+            class="w-full px-4 py-3 bg-gray-900 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500" />
+        </div>
+
+        <div>
+          <label for="program" class="block text-lg font-semibold mb-2">Select Program</label>
+          <select id="program" name="program" required
+            class="w-full px-4 py-3 bg-gray-900 text-white border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500">
+            <option value="" disabled selected>Select a program</option>
+            <option value="btech">B.Tech</option>
+            <option value="bsc">B.Sc</option>
+            <option value="bca">BCA</option>
+          </select>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-red-600 hover:bg-red-700 transition-all duration-300 text-white font-semibold py-3 rounded-xl text-lg">
+          Submit Application
+        </button>
+
+        <p id="thank-you-msg" class="text-green-400 text-center font-bold mt-4 hidden">
+          ✅ Application submitted successfully!
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-center py-6 text-sm text-gray-500">
+    BLOODLINE ~X © 2025 | All Rights Reserved
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    const form = document.getElementById("admission-form");
+    const thankYouMsg = document.getElementById("thank-you-msg");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: "POST",
+        body: new URLSearchParams(formData),
+      })
+      .then((res) => res.text())
+      .then((text) => {
+        if (text === "Success") {
+          thankYouMsg.classList.remove("hidden");
+          form.reset();
+        } else {
+          alert("Something went wrong. Try again.");
+        }
+      })
+      .catch((err) => {
+        alert("Submission error: " + err.message);
+      });
+    });
+  </script>
+</body>
+</html>
